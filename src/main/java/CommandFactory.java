@@ -4,18 +4,16 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class CommandFactory {
     BranchController branchController;
 
-    public static Map<String, Consumer<String>> commands = new HashMap<>();
-
     public CommandFactory(BranchController branchController) {
         this.branchController = branchController;
     }
 
+    //Added factory pattern so that adding new commands is easily feasible
     public Map<String, Function<List<String>, String>> buildCommands() {
         Map<String, Function<List<String>, String>> commands = new HashMap<>();
         commands.put("ADD_BRANCH", addBranch);

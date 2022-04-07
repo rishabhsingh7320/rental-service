@@ -38,6 +38,8 @@ public class BranchService {
         return branchRepository.saveBranch(branch);
     }
 
+
+
     public Vehicle addVehicle(String branchName, String vehicleName, VehicleType type, Double price)
             throws NotFoundException, InvalidOperationException {
         Branch branch = branchRepository.findBranchByName(branchName)
@@ -54,6 +56,8 @@ public class BranchService {
         return vehicle;
 
     }
+
+
 
     //If 2 vehicles of same type available, will book the one with cheaper cost
     public Booking bookVehicle(String branchName, String vehicleType, Integer startTime, Integer endTime)
@@ -75,8 +79,9 @@ public class BranchService {
         return booking;
     }
 
-    public Optional<Vehicle> findFirstAvailableVehicle(Branch branch, VehicleType vehicleType, Integer startTime, Integer endTime) throws AlreadyBookedException {
 
+
+    public Optional<Vehicle> findFirstAvailableVehicle(Branch branch, VehicleType vehicleType, Integer startTime, Integer endTime) throws AlreadyBookedException {
         List<Vehicle> bookedVehicles = bookingService.findBookingForVehicleTypeInTimeRange(branch, vehicleType, startTime, endTime)
                 .stream()
                 .map(booking -> booking.getVehicle())
@@ -96,6 +101,8 @@ public class BranchService {
                 .sorted(Comparator.comparing(Vehicle::getPrice))
                 .findFirst();
     }
+
+
 
     public List<String> findAvailableVehicles(String branchName, Integer startTime, Integer endTime)
             throws NotFoundException, InvalidOperationException {
